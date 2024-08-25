@@ -4,6 +4,9 @@ import path from "path";
 
 export default defineConfig({
   plugins: [vue()],
+  build: {
+    ssrManifest: true,
+  },
   resolve: {
     alias: {
       "@": path.resolve("src"),
