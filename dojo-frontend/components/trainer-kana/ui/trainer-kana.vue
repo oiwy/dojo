@@ -140,13 +140,18 @@ const selectColumn = (i: number) => {
 };
 
 const userInput = ref<string>("");
-const showHint = ref<boolean>(false);
 const inputField = ref<HTMLInputElement | null>(null);
+const showHint = ref<boolean>(false);
 
 const focusInput = () => {
   if (inputField.value) {
     inputField.value.focus();
   }
+};
+
+const toggleHint = () => {
+  showHint.value = !showHint.value;
+  focusInput();
 };
 
 const generateSymbolsToLearn = () => {
@@ -225,27 +230,30 @@ const nextSymbol = () => {
   }, 200);
 };
 
+const countErr = ref<number>(0);
+
 watch(userInput, (newValue) => {
   if (
     newValue !== "" &&
-    newValue.toLowerCase() !== currentSymbol.value.romanji.toLowerCase()
+    newValue.toLowerCase() !== currentSymbol.value.romanji.toLowerCase() &&
+    newValue.length >= currentSymbol.value.romanji.length
   ) {
-    if (newValue.length >= currentSymbol.value.romanji.length) {
-      errSymbol.value = true;
+    errSymbol.value = true;
 
-      setTimeout(() => {
-        errSymbol.value = false;
-      }, 200);
+    setTimeout(() => {
+      errSymbol.value = false;
+    }, 200);
+
+    countErr.value++;
+
+    if (countErr.value >= 3) {
+      toggleHint();
     }
   }
 
   if (newValue.toLowerCase() === currentSymbol.value.romanji.toLowerCase()) {
+    countErr.value = 0;
     nextSymbol();
   }
 });
-
-const toggleHint = () => {
-  showHint.value = !showHint.value;
-  focusInput();
-};
 </script>
