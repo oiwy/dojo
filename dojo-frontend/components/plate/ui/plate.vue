@@ -1,6 +1,7 @@
 <template>
   <div
-    :class="`flex border justify-between border-neutral p-4 rounded-lg items-center col-span-${size}`"
+    class="flex items-center justify-between rounded-lg border border-neutral p-4"
+    :class="`col-span-${size}`"
   >
     <div>
       <h3 class="text-2xl">{{ title }}</h3>
