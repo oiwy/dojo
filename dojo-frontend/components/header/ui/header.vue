@@ -1,22 +1,83 @@
 <template>
-  <header>
+  <header class="container">
     <nav class="navbar bg-base-100">
-      <div class="navbar-start"></div>
+      <div class="navbar-start">
+        <button class="btn btn-neutral" @click="toggleMenu()">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            class="inline-block h-5 w-5 stroke-current"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            ></path>
+          </svg>
+        </button>
+
+        <div>
+          <div
+            class="absolute left-0 top-0 z-50 h-screen transition-all duration-300"
+            :class="{
+              '-translate-x-full': hiddenMenu,
+              'translate-x-0': !hiddenMenu,
+              'opacity-0': hiddenMenu,
+              'opacity-100': !hiddenMenu,
+              'pointer-events-none': hiddenMenu,
+              'pointer-events-auto': !hiddenMenu,
+            }"
+          >
+            <ul class="menu min-h-full w-80 bg-base-200 p-4 text-base-content">
+              <li>
+                <RouterLink
+                  to="/trainer-kana"
+                  class="flex w-full flex-col py-3 hover:text-primary"
+                  @click="toggleMenu()"
+                >
+                  <h6 class="text-2xl leading-none">Hiragana and Katakana</h6>
+                  <small class="text-base leading-none"
+                    >ひらがなとカタカナ</small
+                  >
+                </RouterLink>
+              </li>
+              <li>
+                <RouterLink
+                  to="/trainer-typing"
+                  class="flex w-full flex-col py-3 hover:text-primary"
+                  @click="toggleMenu()"
+                >
+                  <h6 class="text-2xl leading-none">Typing Trainer</h6>
+                  <small class="text-base leading-none">
+                    タイピングトレーナー
+                  </small>
+                </RouterLink>
+              </li>
+            </ul>
+          </div>
+          <div
+            class="absolute bottom-0 left-0 right-0 top-0 z-40 h-screen w-screen bg-base-200/50"
+            :class="{
+              '-translate-x-full': hiddenMenu,
+              'translate-x-0': !hiddenMenu,
+              'opacity-0': hiddenMenu,
+              'opacity-100': !hiddenMenu,
+              'pointer-events-none': hiddenMenu,
+              'pointer-events-auto': !hiddenMenu,
+            }"
+            @click="toggleMenu()"
+          ></div>
+        </div>
+      </div>
+
       <div class="navbar-center">
         <RouterLink to="/" class="btn btn-ghost text-3xl font-black">
           Dojo
         </RouterLink>
       </div>
-      <div class="navbar-end px-1 flex gap-3">
-        <!-- <label class="swap swap-flip text-xl">
-          <input type="checkbox" />
-
-          <button class="swap-on font-semibold">ru</button>
-          <button class="swap-off font-semibold">
-            {{ currentLang }}
-          </button>
-        </label> -->
-
+      <div class="navbar-end flex gap-3">
         <label class="swap swap-rotate">
           <input type="checkbox" class="theme-controller" value="light" />
 
@@ -46,8 +107,12 @@
 </template>
 
 <script setup lang="ts">
-// import { ref } from "vue";
+import { ref } from "vue";
 import { RouterLink } from "vue-router";
 
-// const currentLang = ref("en");
+const hiddenMenu = ref<boolean>(true);
+
+const toggleMenu = (): void => {
+  hiddenMenu.value = !hiddenMenu.value;
+};
 </script>
