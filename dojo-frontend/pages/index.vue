@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div class="container py-8 flex flex-col gap-4">
+    <div class="container flex flex-col gap-4 py-8">
       <h1 class="text-3xl font-bold">Welcome to Dojo</h1>
       <Plates />
     </div>

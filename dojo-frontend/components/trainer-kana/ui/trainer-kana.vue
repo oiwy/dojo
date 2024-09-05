@@ -13,7 +13,7 @@
       style="grid-template-columns: repeat(16, max-content)"
     >
       <div
-        class="flex flex-col justify-between items-center border-neutral border text-center"
+        class="flex flex-col items-center justify-between border border-neutral text-center"
         v-for="(column, i) in kana === 'hiragana' ? hiragana : katakana"
         :key="i"
         @click="selectColumn(i)"
@@ -69,20 +69,20 @@
     </div>
   </div>
 
-  <div v-else-if="mode === 'learn'" class="flex flex-col gap-4 items-center">
+  <div v-else-if="mode === 'learn'" class="flex flex-col items-center gap-4">
     <div class="w-96">
       <p>
         The answer is scored automatically without pressing the enter key. The
         <kbd class="kbd kbd-sm">spacebar</kbd> prompts the answer.
       </p>
 
-      <div class="flex justify-center items-center flex-col pt-10 pb-6">
+      <div class="flex flex-col items-center justify-center pb-6 pt-10">
         <h2
           v-if="currentSymbol"
           class="text-6xl font-bold text-primary transition-all duration-200"
           :class="{
             'scale-125': newSymbol,
-            'text-error animate-shake': errSymbol,
+            'animate-shake text-error': errSymbol,
           }"
           :key="currentSymbol.kanji"
         >
@@ -100,12 +100,12 @@
         v-model="userInput"
         ref="inputField"
         type="text"
-        class="input input-bordered w-full my-4"
+        class="input input-bordered my-4 w-full"
         placeholder="Enter the romanji"
         @keydown.space.prevent="toggleHint"
       />
 
-      <div class="grid gap-4 w-full grid-cols-3">
+      <div class="grid w-full grid-cols-3 gap-4">
         <button class="btn btn-neutral" @click="mode = 'select'">
           Settings
         </button>

@@ -185,8 +185,8 @@ export const katakana = [
   ],
   [
     { kanji: "ダ", romanji: "da" },
-    { kanji: "ヂ", romanji: "ji" },
-    { kanji: "ヅ", romanji: "zu" },
+    { kanji: "ヂ", romanji: "di" },
+    { kanji: "ヅ", romanji: "du" },
     { kanji: "デ", romanji: "de" },
     { kanji: "ド", romanji: "do" },
   ],
